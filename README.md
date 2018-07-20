@@ -1,4 +1,4 @@
-# Coding Dojo Boiler Plate for Node
+# Board Game Simulator
 
 ## Command Summary
 

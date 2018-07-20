@@ -1,7 +1,7 @@
 {
   "name": "coding-dojo",
   "version": "1.0.0",
-  "description": "An environment for simple coding-dojos",
+  "description": "Board Game Simulator",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
