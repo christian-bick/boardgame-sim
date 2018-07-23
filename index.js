@@ -1,5 +1,14 @@
-import add from './src/example/example'
+import play from './src/games/grummel'
 
-const result = add(5, 6)
+const GAMES_TO_SIMULATE = 10000
+const results = []
 
-console.log(result)
+for (let i=0; i<GAMES_TO_SIMULATE; i++) {
+  const result = play()
+  results.push(result)
+}
+
+const wins = results.filter((result) => result.win === true).length
+const winRate = (wins / GAMES_TO_SIMULATE) * 100
+
+console.log('Win Rate:', winRate + '%')
