@@ -1,6 +1,6 @@
 import play from './src/games/grummel'
 
-const GAMES_TO_SIMULATE = 10000
+const GAMES_TO_SIMULATE = 1000
 const results = []
 
 for (let i=0; i<GAMES_TO_SIMULATE; i++) {

@@ -4,9 +4,10 @@ import {piesInOpenTokens} from "./grummel-helpers";
 
 const PIES_TO_WIN = 3
 const MAX_PIES_POSSIBLE = 3
-const MAX_DRAWS = 3
+const FIELDS = 4
+const RESET_FIELD = 4
 const BUMMER_TOKEN_KEY = '3'
-const MAX_BUMMERS_BEFORE_LOOSING = 7
+const MAX_BUMMERS_BEFORE_LOOSING = 5
 
 const InitialVault = {
   '0': 3,
@@ -15,7 +16,7 @@ const InitialVault = {
   '3': 2
 }
 
-const pickNDraws = (max) => {
+const pickField = (max) => {
   return random.integer(1, max)(random.engines.nativeMath)
 }
 
@@ -30,17 +31,22 @@ const play = () => {
     console.log('Next round begins')
     console.log('Bummers so far:', totalBummers)
     console.log('Finished pies so far:', totalPies)
-    const nDraws = pickNDraws(MAX_DRAWS)
+    const field = pickField(FIELDS)
+    if (field === RESET_FIELD && totalBummers > 0) {
+      totalBummers--
+      console.log('Decrement bummers:', totalBummers)
+      continue;
+    }
     // Draw n tokens
-    console.log('Draw N tokens:', nDraws)
-    const drawnTokens = vault.draw(nDraws)
+    console.log('We draw N tokens:', field)
+    const drawnTokens = vault.draw(field)
     console.log('Tokens drawn:', drawnTokens)
     const openTokens = vault.calcDrawnTokens()
     // Determine the amount of drawn bummers
     const bummerCount = openTokens[BUMMER_TOKEN_KEY]
     if (bummerCount > 0) {
       // We drew a bummer
-      console.log('We drew', bummerCount, 'bummers')
+      console.log('Bummers drawn:', bummerCount)
       totalBummers += bummerCount
       console.log('We reset the vault')
       vault.reset()
